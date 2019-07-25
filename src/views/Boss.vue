@@ -11,43 +11,43 @@
 
     </el-row>
     <el-table
-      stripe
       :data="$store.getters.parcelItems"
-      style="width: 100%"
-      :row-class-name="tableRowClassName">
+      :row-class-name="tableRowClassName"
+      stripe
+      style="width: 100%">
       <el-table-column
-        prop="parcelNumber"
         label="运单号"
+        prop="parcelNumber"
         width="180">
       </el-table-column>
       <el-table-column
-        prop="addressee"
         label="收件人"
+        prop="addressee"
         width="180">
       </el-table-column>
       <el-table-column
-        prop="tel"
-        label="电话">
+        label="电话"
+        prop="tel">
       </el-table-column>
       <el-table-column
         :formatter="status"
-        prop="status"
-        label="状态">
+        label="状态"
+        prop="status">
       </el-table-column>
       <el-table-column
         :formatter="appointTime"
-        prop="tel"
-        label="预约时间">
+        label="预约时间"
+        prop="tel">
       </el-table-column>
       <el-table-column
 
       >
         <template slot-scope="scope">
-        <el-button
-          size="mini"
-          @click="confirmReceived(scope.row.parcelNumber)">确认收货
-        </el-button>
-          </template>
+          <el-button
+            @click="confirmReceived(scope.row.parcelNumber)"
+            size="mini">确认收货
+          </el-button>
+        </template>
       </el-table-column>
       <parcelItem :parcel="parcel" v-for="parcel in $store.getters.parcelItems "></parcelItem>
     </el-table>
