@@ -24,7 +24,7 @@
       },
       methods:{
         addNewParcel(){
-          this.$store.dispatch('addNewParcel',{parcelNumber:this.parcelNumber,addressee:this.addressee,tel:this.tel,status:-1});
+          this.$store.dispatch('addNewParcel',{parcelNumber:this.parcelNumber,addressee:this.addressee,tel:this.tel,status:1});
           this.$router.push('/Boss');
         }
 

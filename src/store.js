@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    parcelList:[]
+    parcelList:[],
+    filterStatus :100
   },
   mutations: {
     updateParcelList(state, postResponse) {
@@ -14,6 +15,18 @@ export default new Vuex.Store({
     },
     refreshParcelList(state, getResponse){
       state.parcelList = getResponse;
+    },
+    filterAll(state){
+      state.filterStatus = 100;
+    },
+    filterAppointed(state){
+      state.filterStatus = -1;
+    },
+    filterReceived(state){
+      state.filterStatus = 0;
+    },
+    filterUnAppointed(state){
+      state.filterStatus = 1;
     }
   },
   actions: {
@@ -45,5 +58,24 @@ export default new Vuex.Store({
           alert(error);
         });
     }
-  }
+  },
+  getters: {
+    parcelItems(state) {
+      if (state.filterStatus === -1) {
+        return state.parcelList.filter(v => {
+          return v.status === -1;
+        });
+      } else if (state.filterStatus === 1) {
+        return state.parcelList.filter(v => {
+          return v.status === 1;
+        });
+      } else if (state.filterStatus === 0){
+        return state.parcelList.filter(v => {
+          return v.status === 0;
+        });
+      } else{
+        return state.parcelList;
+      }
+    }
+  },
 })
