@@ -49,8 +49,17 @@ export default new Vuex.Store({
           alert(error);
         });
     },
-    confirmReceived(context,id){
-      axios.patch('http://localhost:8080/parcels/'+id,{status:0})
+    confirmReceived(context,parcelNumber){
+      axios.patch('http://localhost:8080/parcels/'+parcelNumber,{status:0})
+        .then(res => {
+          context.dispatch('initParcelList');
+        })
+        .catch(function (error) { // 请求失败处理
+          alert(error);
+        });
+    },
+    makeAppointment(context,parcelNumber, Time){
+      axios.patch('http://localhost:8080/parcels/'+parcelNumber,{status:-1,appointmentTime:Time})
         .then(res => {
           context.dispatch('initParcelList');
         })
